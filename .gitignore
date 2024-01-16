@@ -1,0 +1,26 @@
+# IntelliJ IDEA
+.idea/
+*.iml
+
+
+# Logs
+*.log
+
+
+# Maven
+target/
+
+
+
+
+# User-specific files
+.idea/workspace.xml
+.idea/tasks.xml
+.idea/datasources.xml
+
+
+# Package Files
+*.war
+*.ear
+*.zip
+*.tar.gz
