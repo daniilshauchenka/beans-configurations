@@ -10,10 +10,9 @@
     <context:annotation-config/>
     <context:component-scan base-package="by.andersen.ex.service"/>
 
-    <bean id="xmlBean" class="by.andersen.ex.service.MyBean" >
+    <bean id="xmlBean" class="by.andersen.ex.service.MyBean" init-method="init" destroy-method="destroy" scope="singleton" >
         <property name="name" value="xmlBean"/>
         <property name="path" value="by.andersen.ex.service.MyBean"/>
-
      </bean>
 
 </beans>

@@ -1,14 +1,11 @@
 package by.andersen.ex.util;
 
-import by.andersen.ex.service.MyServiceBean;
+import by.andersen.ex.service.MyServiceBeanImpl;
 import org.springframework.beans.factory.BeanDefinitionStoreException;
 import org.springframework.beans.factory.config.BeanDefinition;
-import org.springframework.beans.factory.parsing.Location;
-import org.springframework.beans.factory.support.BeanDefinitionReader;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.beans.factory.support.GenericBeanDefinition;
 import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
-import org.springframework.core.io.Resource;
 
 public class CustomBeanDefinitionReader extends XmlBeanDefinitionReader {
     public CustomBeanDefinitionReader(BeanDefinitionRegistry registry) {
@@ -17,7 +14,7 @@ public class CustomBeanDefinitionReader extends XmlBeanDefinitionReader {
 
     public void registerBeansFromRawData(String data){
         BeanDefinition beanDefinition = new GenericBeanDefinition();
-        beanDefinition.setBeanClassName(MyServiceBean.class.getName());
+        beanDefinition.setBeanClassName(MyServiceBeanImpl.class.getName());
         beanDefinition.getPropertyValues().add("someField", data);
         this.getRegistry().registerBeanDefinition("myServiceBean", beanDefinition);
     }
@@ -28,7 +25,7 @@ public class CustomBeanDefinitionReader extends XmlBeanDefinitionReader {
         return 1;
     }
 
-    public int entry(){
+    public int test(){
         return loadBeanDefinitions(new String[]{});
     }
 

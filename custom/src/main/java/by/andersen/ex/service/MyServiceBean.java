@@ -1,6 +1,8 @@
 package by.andersen.ex.service;
 
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -10,19 +12,23 @@ import org.springframework.stereotype.Component;
 @Getter
 @Setter
 @ToString
-@Component
-public class MyServiceBean {
+
+public class MyServiceBeanImpl implements MyServiceBean {
     private String name;
     private String path;
 
-    private String someField;
-    @Autowired
-    public MyServiceBean() {
+    public MyServiceBeanImpl() {
 
+    }
+@JsonCreator
+    public MyServiceBeanImpl(@JsonProperty("name") String name,
+                             @JsonProperty("path") String path) {
+        this.name = name;
+        this.path = path;
     }
 
     public String action() {
-        return "this is custom bean: name=" + name + " path=" + path + " someField=" + someField;
+        return "this is custom bean: name=" + name + " path=" + path ;
     }
 }
 
