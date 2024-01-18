@@ -1,8 +1,7 @@
-package by.andersen.ex.util.v5;
+package by.andersen.ex.util;
 
 import by.andersen.ex.service.MyServiceBean;
 import org.apache.http.HttpStatus;
-import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -19,8 +18,8 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-public class JsonBeanDefinitionRegistrar5 implements ImportBeanDefinitionRegistrar {
-    public JsonBeanDefinitionRegistrar5() {
+public class JsonBeanDefinitionRegistrar implements ImportBeanDefinitionRegistrar {
+    public JsonBeanDefinitionRegistrar() {
     }
 
     private static Map<String, Class> beanTypes = new HashMap<>();
@@ -32,23 +31,16 @@ public class JsonBeanDefinitionRegistrar5 implements ImportBeanDefinitionRegistr
     @Override
     public void registerBeanDefinitions(AnnotationMetadata importingClassMetadata, BeanDefinitionRegistry registry) {
         //connect to API and get beans data
-        String jsonConfiguration = "{ \"beans\": { \"myBean\": " +
-                "{ \"beanType\": \"MyServiceBean\", " +
-                "\"fields\": { \"name\": \"TestName78282828\", \"path\": \"/test412421\" }, " +
-                "\"initMethod\": \"initMethod\", " +
-                "\"destroyMethod\": \"destroyMethod\", " +
-                "\"scope\": \"singleton\" } } }";
-
-        jsonConfiguration = getJsonBeans();
+        String jsonConfiguration = getJsonBeans();
         //parse and reg
-        Map<String, JsonBeanConfig5> beansToRegister = JsonBeanWrapper5.fromJson(jsonConfiguration).getBeans();
-        for (Map.Entry<String, JsonBeanConfig5> entry : beansToRegister.entrySet()) {
+        Map<String, JsonBeanConfig> beansToRegister = JsonBeanWrapper.fromJson(jsonConfiguration).getBeans();
+        for (Map.Entry<String, JsonBeanConfig> entry : beansToRegister.entrySet()) {
             registerBean(entry.getKey(), entry.getValue(), registry);
         }
     }
 
 
-    private void registerBean(String beanName, JsonBeanConfig5 beanConfig, BeanDefinitionRegistry registry) {
+    private void registerBean(String beanName, JsonBeanConfig beanConfig, BeanDefinitionRegistry registry) {
         Class beanType = beanTypes.get(beanConfig.getBeanType());
         if (beanType == null) {
             throw new IllegalArgumentException("Unknown bean type: " + beanConfig.getBeanType());

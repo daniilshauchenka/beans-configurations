@@ -46,10 +46,12 @@ public class BeanExporter {
 //        return objectMapper.writeValueAsString(jsonStructure);
 //    }
 
-    public String toJson(String beanName) throws JsonProcessingException {
+    public JsonBeanConfig toJsonBeanConfig(String beanName) throws JsonProcessingException {
         ConfigurableListableBeanFactory factory = ((ConfigurableListableBeanFactory) applicationContext.getAutowireCapableBeanFactory());
         BeanDefinition beanDefinition = factory.getBeanDefinition(beanName);
 
+        JsonBeanConfig jsonBeanConfig = new JsonBeanConfig();
+        jsonBeanConfig.setBeanType(beanDefinition.getBeanClassName());
         Map<String, Object> beanProperties = new HashMap<>();
         beanProperties.put("beanType", beanDefinition.getBeanClassName());
 
@@ -67,10 +69,12 @@ public class BeanExporter {
             beanProperties.put("initMethod", abstractBeanDefinition.getInitMethodName());
         }
 
+
         ObjectMapper objectMapper = new ObjectMapper();
         Map<String, Object> jsonStructure = Map.of("beans", Map.of(beanName, beanProperties));
 
-        return objectMapper.writeValueAsString(jsonStructure);
+        //return objectMapper.writeValueAsString(jsonStructure);
+        return null;
     }
 
 }

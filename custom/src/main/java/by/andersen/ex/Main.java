@@ -1,36 +1,30 @@
 package by.andersen.ex;
 
 import by.andersen.ex.service.MyServiceBean;
-import by.andersen.ex.util.CustomBeanDefinitionReader;
-import jakarta.annotation.Resource;
-import org.springframework.beans.factory.support.DefaultListableBeanFactory;
+import by.andersen.ex.util.JsonBeanDefinitionRegistrar;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.Import;
 
 @SpringBootApplication(exclude = DataSourceAutoConfiguration.class)
+//@Import(MyServiceBeanLoader.class)
+//@Import(JSONBeanDefinitionRegistrar.class)
+@Import(JsonBeanDefinitionRegistrar.class)
 public class Main {
     public static void main(String[] args) {
-        SpringApplication.run(Main.class, args);
-
-
-
-
-        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
-        CustomBeanDefinitionReader reader = new CustomBeanDefinitionReader((DefaultListableBeanFactory) context.getBeanFactory());
-        reader.entry();
-        context.refresh();
-        String[] beanDefintions = context.getBeanDefinitionNames();
-        MyServiceBean bean = context.getBean(MyServiceBean.class);
-
-        System.out.println(bean);
-
-
-
-
-
-
+        ConfigurableApplicationContext context = SpringApplication.run(Main.class, args);
+//
+//        String[] beanNames = context.getBeanDefinitionNames();
+//        MyServiceBean first = context.getBean(MyServiceBean.class);
+//        System.out.println(first);
+//        for (String name:beanNames) {
+//         //   System.out.println(name);
+//        }
+//
+//        MyServiceBean retrievedBean = context.getBean(MyServiceBean.class);
+//        System.out.println(retrievedBean.action());
     }
 
 }

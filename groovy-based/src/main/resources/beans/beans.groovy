@@ -4,7 +4,8 @@ import ex.service.MyServiceBean
 
 beans {
     myBean(MyServiceBean) {
-        name = "groovyName"
-        path = "groovyPath"
+        name = "groovy"
+        path = "groovy1"
+
     }
 }

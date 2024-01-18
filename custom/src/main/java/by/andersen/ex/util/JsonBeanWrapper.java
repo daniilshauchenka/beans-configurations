@@ -1,4 +1,4 @@
-package by.andersen.ex.util.v5;
+package by.andersen.ex.util;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -8,23 +8,23 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-public class JsonBeanWrapper5 {
+public class JsonBeanWrapper {
 
-    private final Map<String, JsonBeanConfig5> beans;
+    private final Map<String, JsonBeanConfig> beans;
 
-    public JsonBeanWrapper5(Map<String, JsonBeanConfig5> beans) {
+    public JsonBeanWrapper(Map<String, JsonBeanConfig> beans) {
         this.beans = beans;
     }
 
-    public Map<String, JsonBeanConfig5> getBeans() {
+    public Map<String, JsonBeanConfig> getBeans() {
         return beans;
     }
 
-    public static JsonBeanWrapper5 fromJson(String json) {
+    public static JsonBeanWrapper fromJson(String json) {
         ObjectMapper objectMapper = new ObjectMapper();
         try {
             JsonNode root = objectMapper.readTree(json).get("beans");
-            Map<String, JsonBeanConfig5> beanConfigs = new HashMap<>();
+            Map<String, JsonBeanConfig> beanConfigs = new HashMap<>();
             Iterator<Map.Entry<String, JsonNode>> fieldsIterator = root.fields();
             while (fieldsIterator.hasNext()) {
                 Map.Entry<String, JsonNode> field = fieldsIterator.next();
@@ -37,11 +37,11 @@ public class JsonBeanWrapper5 {
                 String destroyMethod = beanNode.get("destroyMethod").asText();
                 String scope = beanNode.get("scope").asText();
 
-                JsonBeanConfig5 beanConfig = new JsonBeanConfig5(beanType,fields, initMethod, destroyMethod, scope);
+                JsonBeanConfig beanConfig = new JsonBeanConfig(beanType,fields, initMethod, destroyMethod, scope);
                 beanConfigs.put(beanName, beanConfig);
             }
 
-            return new JsonBeanWrapper5(beanConfigs);
+            return new JsonBeanWrapper(beanConfigs);
 
 
         } catch (JsonProcessingException e) {

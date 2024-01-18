@@ -5,7 +5,6 @@ import org.springframework.stereotype.Component;
 
 
 @ToString
-@Component
 public class MyBean {
     private String name;
     private String path;
@@ -29,6 +28,14 @@ public class MyBean {
     public void setPath(String path) {
         System.out.println("set path "  +path);
         this.path = path;
+    }
+
+    public void init(){
+        System.out.println("init!!!");
+    }
+
+    public void destroy(){
+        System.out.println("destroy!!!");
     }
 
     public String action(){

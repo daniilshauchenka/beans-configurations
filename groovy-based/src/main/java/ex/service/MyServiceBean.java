@@ -1,5 +1,6 @@
 package ex.service;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -16,9 +17,12 @@ public class MyServiceBean {
 
     }
 
-
+    public void myInit(){
+        System.out.println("my init method");
+    }
 
     public String action() {
+
         return "this is groovy bean: " + name + " " + path;
     }
 }

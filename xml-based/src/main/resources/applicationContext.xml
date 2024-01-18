@@ -14,5 +14,7 @@
         <property name="name" value="xmlBean"/>
         <property name="path" value="by.andersen.ex.service.MyBean"/>
      </bean>
+    <bean id="beanExporter" class="by.andersen.ex.utils.BeanExporter" >
 
+    </bean>
 </beans>

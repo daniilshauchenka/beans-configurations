@@ -13,22 +13,29 @@ import org.springframework.stereotype.Component;
 @Setter
 @ToString
 
-public class MyServiceBeanImpl implements MyServiceBean {
+public class MyServiceBean  {
     private String name;
     private String path;
 
-    public MyServiceBeanImpl() {
+    public MyServiceBean() {
 
     }
 @JsonCreator
-    public MyServiceBeanImpl(@JsonProperty("name") String name,
-                             @JsonProperty("path") String path) {
+    public MyServiceBean(@JsonProperty("name") String name,
+                         @JsonProperty("path") String path) {
         this.name = name;
         this.path = path;
     }
 
     public String action() {
         return "this is custom bean: name=" + name + " path=" + path ;
+    }
+
+    public void initMethod(){
+        System.out.println("this is init!");
+    }
+    public void destroyMethod(){
+        System.out.println("this is init!");
     }
 }
 
