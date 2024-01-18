@@ -88,14 +88,11 @@ public class JsonBeanDefinitionRegistrar5 implements ImportBeanDefinitionRegistr
                         .build())
                 .build();
 
-        String URL = "http://localhost:8082/api/test3";
+        String URL = "http://localhost:8080/api/json";
         try (CloseableHttpResponse response = httpClient.execute(new HttpGet(URL))) {
-            // Проверка успешности выполнения запроса
             if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
-                // Получение содержимого ответа в виде строки JSON
                 return EntityUtils.toString(response.getEntity());
             } else {
-                // Обработка ошибки, если запрос не был успешным
                 System.err.println("HTTP request failed with status code: " + response.getStatusLine().getStatusCode());
             }
         } catch (IOException e) {
